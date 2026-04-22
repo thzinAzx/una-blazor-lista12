@@ -1,0 +1,47 @@
+﻿@page "/"
+
+<PageTitle>EcoMonitor - Painel Sustentável</PageTitle>
+
+<div class="home-container">
+    <div class="home-header">
+        <h1>🌍 EcoMonitor</h1>
+        <p class="subtitulo">Transformando pequenas ações em grande impacto ambiental.</p>
+    </div>
+
+    <div class="eco-grid">
+        <EcoStatus NomeAcao="Reciclagem de Plástico" PesoAcao="1" />
+        <EcoStatus NomeAcao="Descarte de Eletrônicos" PesoAcao="5" />
+        <EcoStatus NomeAcao="Plantio de Árvores" PesoAcao="10" />
+    </div>
+</div>
+
+<style>
+    .home-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem;
+    }
+
+    .home-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+        .home-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+    .subtitulo {
+        color: #555;
+        font-size: 1.1rem;
+    }
+
+    .eco-grid {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+</style>

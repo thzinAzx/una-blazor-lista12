@@ -1,0 +1,120 @@
+﻿@* Componente EcoStatus - Registra ações ambientais e acumula pontos *@
+
+<div class="eco-card @(Total >= 100 ? "meta-atingida" : Total >= 50 ? "quase-la" : "")">
+    <h3>@NomeAcao</h3>
+    <p>Pontos por ação: <strong>@PesoAcao</strong></p>
+    <p>Total acumulado:</p>
+
+    <span class="badge @(Total >= 100 ? "badge-gold" : Total >= 50 ? "badge-green" : "badge-blue")">
+        @Total
+    </span>
+
+    @* Barra de progresso (Desafio Extra) *@
+    <div class="progress-bar-bg">
+        <div class="progress-bar-fill" style="width: @Math.Min(Total, 100)%"></div>
+    </div>
+    <small class="progress-label">@Math.Min(Total, 100)/100 pontos</small>
+
+    <br />
+    <button class="btn-registrar" @onclick="RegistrarAcao">
+        Registrar Atividade
+    </button>
+
+    @* Mensagem de conquista ao atingir 100 pontos (Desafio Extra) *@
+    @if (Total >= 100)
+    {
+        <p class="conquista">🏆 Meta batida!<br />Você é um Herói do Planeta!</p>
+    }
+</div>
+
+@code {
+    [Parameter] public string NomeAcao { get; set; } = "Ação";
+    [Parameter] public int PesoAcao { get; set; } = 1;
+
+    private int Total = 0;
+
+    private void RegistrarAcao()
+    {
+        Total += PesoAcao;
+    }
+}
+
+<style>
+    .eco-card {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 1rem;
+        width: 200px;
+        text-align: left;
+        background-color: white;
+        box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+        transition: border-color 0.3s;
+    }
+
+    .eco-card.quase-la {
+        border-color: #28a745;
+    }
+
+    .eco-card.meta-atingida {
+        border-color: #ffc107;
+        background-color: #fffbf0;
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-weight: bold;
+        color: white;
+        font-size: 1rem;
+        margin-bottom: 8px;
+    }
+
+    .badge-blue  { background-color: #007bff; }
+    .badge-green { background-color: #28a745; }
+    .badge-gold  { background-color: #ffc107; color: #333; }
+
+    .progress-bar-bg {
+        background-color: #e9ecef;
+        border-radius: 8px;
+        height: 10px;
+        width: 100%;
+        margin-top: 6px;
+    }
+
+    .progress-bar-fill {
+        background-color: #28a745;
+        height: 10px;
+        border-radius: 8px;
+        transition: width 0.3s ease;
+    }
+
+    .progress-label {
+        font-size: 0.75rem;
+        color: #666;
+    }
+
+    .btn-registrar {
+        margin-top: 10px;
+        padding: 8px 16px;
+        background-color: transparent;
+        color: #007bff;
+        border: 1px solid #007bff;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: background-color 0.2s, color 0.2s;
+    }
+
+    .btn-registrar:hover {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .conquista {
+        margin-top: 10px;
+        color: #28a745;
+        font-weight: bold;
+        font-size: 0.9rem;
+    }
+</style>
